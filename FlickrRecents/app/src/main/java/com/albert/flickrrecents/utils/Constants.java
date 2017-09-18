@@ -30,20 +30,6 @@ public class Constants {
     //header builder
     public static String AUTH_HEADER = "";
 
-    public ImageLoader getImageLoader() {
-        if (mImageLoader == null) {
-            mImageLoader = new ImageLoader(Volley.newRequestQueue(getApplicationContext()), new LruBitmapCache());
-//            mImageLoader = new ImageLoader(getRequestQueue(), new ImageLoader.ImageCache() {
-//                private final LruCache<String, Bitmap> mCache = new LruCache<String, Bitmap>(10);
-//                public void putBitmap(String url, Bitmap bitmap) {
-//                    mCache.put(url, bitmap);
-//                }
-//                public Bitmap getBitmap(String url) {
-//                    return mCache.get(url);
-//                }
-//            });
-        }
-        return this.mImageLoader;
-    }
+
 
 }

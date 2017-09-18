@@ -1,6 +1,8 @@
 package com.albert.flickrrecents.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.ImageView;
 
 import com.albert.flickrrecents.R;
 import com.albert.flickrrecents.models.FlickrImageModel;
+import com.albert.flickrrecents.utils.VolleyControl;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 
@@ -41,10 +44,11 @@ import java.util.List;
 public class FlickrImageAdapter extends RecyclerView.Adapter<FlickrImageAdapter.PersonViewHolder>{
     private List<FlickrImageModel> images;
     private ImageLoader imageLoader;
+    private  String TAG = FlickrImageAdapter.class.getSimpleName();
 
-    public FlickrImageAdapter(List<FlickrImageModel> images) {
+    public FlickrImageAdapter(List<FlickrImageModel> images, Context context) {
         this.images = images;
-        imageLoader= AppController.getInstance().getImageLoader();
+        imageLoader= VolleyControl.getInstance(context).getImageLoader();
 
     }
 
@@ -63,7 +67,10 @@ public class FlickrImageAdapter extends RecyclerView.Adapter<FlickrImageAdapter.
     @Override
     public void onBindViewHolder(PersonViewHolder personViewHolder, int i) {
 
-        personViewHolder.fl_imageView.setImageUrl(images.get(i).getId(),imageLoader);
+        personViewHolder.fl_imageView.setDefaultImageResId(R.drawable.loading_thumb);
+        personViewHolder.fl_imageView.setImageUrl(images.get(i).getImageURL(),imageLoader);
+
+        Log.d(TAG, "getImageURL:"+images.get(i).getImageURL());
     }
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder {
@@ -77,77 +84,4 @@ public class FlickrImageAdapter extends RecyclerView.Adapter<FlickrImageAdapter.
         }
     }
 
-   /* private List<FlickrImageModel> images;
-    private ImageLoader imageLoader;
-
-    public FlickrImageAdapter(List<FlickrImageModel> catList) {
-        this.images = catList;
-
-    }
-
-
-    @Override
-    public int getItemCount() {
-        return images.size();
-    }
-
-
-    @Override
-    public void onBindViewHolder(NewsViewHolder holder, int position) {
-        FlickrImageModel image = images.get(position);
-
-
-                holder.fl_imageView.setImageUrl("", imageLoader);
-    }
-
-    @Override
-    public void onBindViewHolder(NewsViewHolder imageViewHolder, int position) {
-
-        FlickrImageModel image = images.get(position);
-
-
-
-        imageViewHolder.fl_imageView.setImageUrl("", imageLoader);
-
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-
-        public NetworkImageView fl_imageView;
-
-
-        public ViewHolder(View itemView) {
-
-            super(itemView);
-
-            fl_imageView = (NetworkImageView) itemView.findViewById(R.id.image);
-
-        }
-
-    }
-
-
-    @Override
-    public NewsViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View itemView = LayoutInflater.
-                from(viewGroup.getContext()).
-                inflate(R.layout.image_item, viewGroup, false);
-        return new NewsViewHolder(itemView);
-    }
-
-    public static class NewsViewHolder extends RecyclerView.ViewHolder {
-
-        protected NetworkImageView fl_imageView;
-
-
-
-        public NewsViewHolder(View v) {
-            super(v);
-
-            fl_imageView = (NetworkImageView) v.findViewById(R.id.fl_imageView);
-
-        }
-
-
-    }*/
 }

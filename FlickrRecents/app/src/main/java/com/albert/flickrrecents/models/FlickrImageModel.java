@@ -214,7 +214,13 @@ public class FlickrImageModel {
     }
 
 
+    /*
+    * get image url format: https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
+    * */
+    public String getImageURL(){
 
+        return "https://farm"+farm+".staticflickr.com/"+server+"/"+id+"_"+secret+".jpg";
+    }
 
 
 

@@ -48,7 +48,7 @@ public class ApiManager {
                     public void onResponse(JSONObject response) {
                         try {
 
-                              Log.e("responsepost: ", "" + response.toString(7));
+                              Log.d("json from url: ", "" + response.toString(7));
 
                            SharedPreferences.Editor editor = sharedpreferences.edit();
 

@@ -36,17 +36,9 @@ public class MainActivity extends AppCompatActivity {
         mContext = getApplicationContext();
 
         ActionBar actionBar = getSupportActionBar();
-
         actionBar.setTitle("Swipe Right to Left");
 
-
         sharedPreferences = getSharedPreferences(IMAGE_JSON_SHARED_PREF_KEY, Context.MODE_PRIVATE);
-
-
-
-        //initialize call to server
-
-
 
         String fJsonString = sharedPreferences.getString("photo", "empty");
 
@@ -99,11 +91,7 @@ public class MainActivity extends AppCompatActivity {
                             rc1.setLayoutManager(llm);
                             rc1.setAdapter(fAdapter);
 
-
-
                        }//if
-
-
 
                     }//shared
                 });
@@ -114,8 +102,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        HashMap<String, String> hsm = new HashMap<>();
-        new ApiManager().getRecentPhotos(hsm, mContext);
+        //initialize call to server
+        new ApiManager().getRecentPhotos(mContext);
 
 
     }

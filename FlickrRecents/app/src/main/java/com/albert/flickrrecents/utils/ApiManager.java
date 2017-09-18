@@ -35,14 +35,14 @@ public class ApiManager {
     SharedPreferences initsharedpreferences;
     private static String TAG = ApiManager.class.getSimpleName();
 
-    public void getRecentPhotos(HashMap<String, String> params, final Context context) {
+    public void getRecentPhotos(final Context context) {
         this.context = context;
         sharedpreferences = context.getSharedPreferences(IMAGE_JSON_SHARED_PREF_KEY, Context.MODE_PRIVATE);
         RequestQueue queue = Volley.newRequestQueue(context);
 
         Log.d(TAG, "FLICKER_RECENT_PHOTOS_URL: "+FLICKER_RECENT_PHOTOS_URL);
 
-        JsonObjectRequest req = new JsonObjectRequest(FLICKER_RECENT_PHOTOS_URL, new JSONObject(params),
+        JsonObjectRequest req = new JsonObjectRequest(FLICKER_RECENT_PHOTOS_URL, new JSONObject(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
